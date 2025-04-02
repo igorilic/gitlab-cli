@@ -2,9 +2,9 @@ name: Rust Tests
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 env:
   CARGO_TERM_COLOR: always
@@ -20,12 +20,10 @@ jobs:
           profile: minimal
           toolchain: stable
           override: true
-          toolchain: stable
-          override: true
       - uses: actions-rs/cargo@v1
         with:
           command: test
-          args: --verbose --features ci
+          args: --verbose
 
   lint:
     name: Lint
@@ -64,9 +62,8 @@ jobs:
       - uses: actions-rs/cargo@v1
         with:
           command: tarpaulin
-          args: --verbose --features ci --out Xml --timeout 120
+          args: --verbose --out Xml --timeout 120
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
           fail_ci_if_error: true
-          profile: minimal
