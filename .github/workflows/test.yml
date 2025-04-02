@@ -62,9 +62,12 @@ jobs:
       - uses: actions-rs/cargo@v1
         with:
           command: tarpaulin
-          args: --verbose --out Xml --timeout 120
+          args: --verbose --out Xml --output-dir ./coverage --timeout 120
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
         with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          directory: ./coverage/
           fail_ci_if_error: true
+          files: ./coverage/cobertura.xml
           verbose: true
